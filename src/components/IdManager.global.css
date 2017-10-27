@@ -1,0 +1,9 @@
+/*hack to hide swiper js' 3d effect shadows */
+
+.id-manager .swiper-slide-shadow-left{
+  display: none !important;
+}
+
+.id-manager .swiper-slide-shadow-right{
+  display: none !important;
+}

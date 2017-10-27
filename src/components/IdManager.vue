@@ -12,7 +12,7 @@
     <template v-else>
       <swiper class="swiper-container" :options="swiperOption" ref="mySwiper" :not-next-tick="notNextTick">
         <swiper-slide v-for='(i, index) in identities' :key='i.address'>
-          <ae-identity :active="isActive(i)" :identity='i' :size="'big'" @click="swipeTo(index)" :collapsed="false">
+          <ae-identity :active="isActive(i)" :identity='i' :size="'big'" @click="swipeTo(index)" class="id-manager__identity" :collapsed="false">
             <ae-button :role="'default'">
               <button @click="copyAddress(i.address)">Copy Address</button>
             </ae-button>
@@ -51,3 +51,4 @@
 <script src='./IdManager.js'/>
 <style src="swiper/dist/css/swiper.css"/>
 <style scoped src='./IdManager.css'/>
+<style src='./IdManager.global.css'/>

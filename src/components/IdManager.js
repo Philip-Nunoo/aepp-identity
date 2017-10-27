@@ -18,9 +18,16 @@ export default {
         mousewheelControl: true,
         observeParents: true,
         debugger: true,
+        spaceBetween: 80,
+        centeredSlides: true,
+        effect: 'coverflow',
         slidesPerView: 2,
-        spaceBetween: 10,
-        centeredSlides: true
+        coverflowEffect: {
+          rotate: 30,
+          slideShadows: false,
+          modifier: 5,
+          depth: 3000
+        }
       }
     }
   },

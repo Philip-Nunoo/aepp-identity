@@ -26,3 +26,15 @@
 .ae-identity .ae-button {
   overflow: hidden;
 }
+
+@media screen and (max-width: 720px) {
+  .id-manager__identity{
+    display: inline-block;
+    position: relative;
+    width: auto;
+    transform: translateX(-30%) scale(0.7);
+  }
+}
+
+
+
