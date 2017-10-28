@@ -7,3 +7,10 @@
 .id-manager .swiper-slide-shadow-right{
   display: none !important;
 }
+.id-manager .swiper-slide-shadow-top{
+  display: none !important;
+}
+
+.id-manager .swiper-slide-shadow-bottom{
+  display: none !important;
+}

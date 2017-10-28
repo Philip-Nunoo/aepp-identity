@@ -9,7 +9,7 @@ export default {
     return {
       notNextTick: true,
       swiperOption: {
-        direction: 'horizontal',
+        direction: 'vertical',
         grabCursor: true,
         setWrapperSize: true,
         autoHeight: true,
@@ -18,10 +18,12 @@ export default {
         mousewheelControl: true,
         observeParents: true,
         debugger: true,
-        spaceBetween: 80,
+        spaceBetween: 0,
         centeredSlides: true,
-        effect: 'coverflow',
         slidesPerView: 2,
+        roundLengths: true,
+        effect: 'coverflow',
+        height: 500,
         coverflowEffect: {
           rotate: 30,
           slideShadows: false,
