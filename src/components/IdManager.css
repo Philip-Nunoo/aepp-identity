@@ -9,6 +9,7 @@
 }
 .close-id-manager-button{
   margin-top:40px;
+  height: 100%;
 }
 .explanation {
   padding:0 20px;
@@ -27,19 +28,36 @@
   overflow: hidden;
 }
 
+.id-manager__ae-button + .id-manager__ae-button{
+  margin-left: 16px !important;
+  height: 30px !important;
+}
+
+.add-button-container{
+  float: right;
+  display: flex;
+  align-items: center;
+}
+
+.id-added-button{
+  text-transform: uppercase;
+}
+
 .swiper-sizer{
   overflow: hidden;
   position: relative;
 }
 
-.swiper-sizer{
+.swiper-sizer._direction_vertical{
   height: 100%;
   width:100%;
 }
 
+.swiper-sizer._direction_horizontal{
+  height: auto;
+}
+
 .swiper-sizer .swiper-slide{
-  /*text-align: center;
-  text-align: center;*/
   display: flex;
   align-content: center;
   justify-content: center;
