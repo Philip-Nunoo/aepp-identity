@@ -38,7 +38,11 @@
 }
 
 .swiper-sizer .swiper-slide{
-  text-align: center;
+  /*text-align: center;
+  text-align: center;*/
+  display: flex;
+  align-content: center;
+  justify-content: center;
 }
 
 .swiper-sizer._direction_vertical{
@@ -78,7 +82,7 @@
     display: inline-block;
     position: relative;
     width: auto;
-    transform: scale(0.7);
+    transform: scale(0.8);
   }
 }
 
