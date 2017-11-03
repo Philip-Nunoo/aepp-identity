@@ -9,7 +9,7 @@
 }
 .close-id-manager-button{
   margin-top:40px;
-  height: 100%;
+  margin-bottom: 15px;
 }
 .explanation {
   padding:0 20px;
@@ -95,7 +95,16 @@
   }
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (min-width: 600px) and (max-width: 720px) {
+  .id-manager__identity{
+    display: inline-block;
+    position: relative;
+    width: auto;
+    transform: scale(0.8);
+  }
+}
+
+@media screen and (max-width: 360px) {
   .id-manager__identity{
     display: inline-block;
     position: relative;
