@@ -98,8 +98,14 @@ export default {
       document.body.removeChild(textArea)
     },
     swipeTo (index) {
-      if (index >= 0 && index < this.identities.length) {
-        this.$refs.mySwiper.swiper.slideTo(index)
+      if (index >= 0 && index < this.identities.length && this.$refs.mySwiper) {
+        if (Array.isArray(this.$refs.mySwiper)) {
+          this.$refs.mySwiper.forEach(swiperElem => {
+            swiperElem.swiper.slideTo(index)
+          })
+        } else {
+          this.$refs.mySwiper.swiper.slideTo(index)
+        }
       }
     }
   },
@@ -112,6 +118,6 @@ export default {
     }
   },
   mounted () {
-    this.$refs.mySwiper.swiper.slideTo(this.$store.state.selectedIdentityIdx)
+    this.swipeTo(this.$store.state.selectedIdentityIdx)
   }
 }
