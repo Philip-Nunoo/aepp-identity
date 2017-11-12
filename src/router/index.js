@@ -14,7 +14,7 @@ export const PATHS = {
   SETUP: '/setup',
   UNLOCK: '/unlock',
   EMBEDDED_APP: '/app-browser',
-  TRANSFER : '/transfer'
+  TRANSFER: '/transfer'
 }
 
 const router = new Router({
@@ -111,14 +111,12 @@ _pathResolvers[PATHS.UNLOCK] = function (state) {
   }
 }
 
-_pathResolvers[PATHS.SETUP] = function (state) {
-  //if (state.keystore) {
-    //if (state.unlocked) {
-      //return PATHS.EMBEDDED_APP
-    //} else {
-      //return PATHS.UNLOCK
-    //}
-  //}
+_pathResolvers[PATHS.TRANSFER] = function (state) {
+  if (!state.keystore) {
+    return PATHS.SETUP
+  } else if (state.keystore && !state.unlocked) {
+    return PATHS.UNLOCK
+  }
 }
 
 export const manageRouting = function (store, router) {

@@ -2,17 +2,14 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import aeAbi from '../abi/aeternity-token-abi.json'
 import BigNumber from 'bignumber.js'
+import {createWeb3GuardProxy} from '@/web3/GuardingProxy'
 import ZeroClientProvider from 'web3-provider-engine/zero'
 import lightwallet from 'eth-lightwallet'
 import Web3 from 'web3'
 import Transaction from 'ethereumjs-tx'
+import * as AppTypes from '@/enumerations/AppTypeEnum'
 
 Vue.use(Vuex)
-
-const APP_TYPES = {
-  INTERNAL : 0,
-  EXTERNAL : 1,
-}
 
 const store = (function () {
   var aeContract
@@ -34,24 +31,24 @@ const store = (function () {
       balances: [],
       rpcUrl: 'https://kovan.infura.io',
       keystore: null,
-      apps : [
+      apps: [
         {
-          type : APP_TYPES.EXTERNAL,
-          name : 'Notary',
-          icon : 'static/icons/notary.svg',
-          main : 'static/aexistence/index.html'
+          type: AppTypes.EXTERNAL,
+          name: 'Notary',
+          icon: 'static/icons/notary.svg',
+          main: 'static/aexistence/index.html'
         },
         {
-          type : APP_TYPES.EXTERNAL,
-          name : 'Notary2',
-          icon : 'static/icons/notary.svg',
-          main : 'http://localhost:8081/#/'
+          type: AppTypes.EXTERNAL,
+          name: 'Notary2',
+          icon: 'static/icons/notary.svg',
+          main: 'http://localhost:8081/#/'
         },
         {
-          type : APP_TYPES.INTERNAL,
-          name : 'Transfer',
-          icon : 'static/icons/notary.svg',
-          main : '/transfer'
+          type: AppTypes.INTERNAL,
+          name: 'Transfer',
+          icon: 'static/icons/notary.svg',
+          main: '/transfer'
         },
       ],
     },
@@ -71,8 +68,8 @@ const store = (function () {
       setKeystore (state, keystore) {
         state.keystore = keystore
       },
-      addApp( state , app) {
-        this.state.apps.push(app);
+      addApp (state, app) {
+        this.state.apps.push(app)
       },
       setUnlocked (state, unlocked) {
         state.unlocked = unlocked
@@ -153,10 +150,10 @@ const store = (function () {
       }
     },
     actions: {
-      signTransaction({state}, {t, success, error}) {
-        console.log("STORE", t);
-        var signed = lightwallet.signing.signTx(state.keystore, derivedKey, t.serialize().toString('hex'), tx.from)
-        if(typeof success === 'function') {
+      signTransaction ({state}, {t, success, error}) {
+        console.log('STORE', t)
+        var signed = lightwallet.signing.signTx(state.keystore, derivedKey, t.serialize().toString('hex'), t.from)
+        if (typeof success === 'function') {
           success(signed)
         }
         //else if(typeof error === 'function') {
@@ -165,24 +162,24 @@ const store = (function () {
           //throw
         //}
       },
-      addApp( {commit }, url) {
+      addApp ({commit}, url) {
         const CORS = 'http://cors-anywhere.herokuapp.com/'
-        fetch(CORS + url).then(function(response) {
-          return response.text().then(function(text) {
-            var el = document.createElement( 'html' )
-            el.innerHTML=text
+        fetch(CORS + url).then(function (response) {
+          return response.text().then(function (text) {
+            var el = document.createElement('html')
+            el.innerHTML = text
             var title = el.getElementsByTagName('title')[0].innerText
             commit('addApp',
               {
-                name : title,
-                icon : 'static/icons/notary.svg',
-                main : url
+                name: title,
+                icon: 'static/icons/notary.svg',
+                main: url
               }
             )
-          });
+          })
         })
       },
-      logout({getters, dispatch, state, commit}) {
+      logout ({getters, dispatch, state, commit}) {
         aeContract = null
         derivedKey = null
         web3 = null
@@ -210,7 +207,7 @@ const store = (function () {
         }
       },
       mkWeb3ForApps () {
-        web3ForApps = new Web3(new ZeroClientProvider(providerOptsForApps))
+        web3ForApps = createWeb3GuardProxy(providerOptsForApps)
         window.web3 = web3ForApps
       },
       updateBalances ({ getters, dispatch, commit, state }) {
