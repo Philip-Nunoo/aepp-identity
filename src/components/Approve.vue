@@ -9,23 +9,27 @@
         <p class="app-name">Identity Manager</p>
         <span>Requests a transaction</span>
         <div class="transaction-flow">
-          <div class="id">
+          <div class="id" :title="`from ${from}`">
             <ae-identity-avatar :address="from"></ae-identity-avatar>
             <div>{{from}}</div>
           </div>
           <ae-icon name='arrow' class="approve__flow-direction"></ae-icon>
-          <div class="id">
+          <div class="id" :title="`to ${to}`">
             <ae-identity-avatar :address="to"></ae-identity-avatar>
             <div>{{to}}</div>
           </div>
         </div>
         <hr>
-        <ae-amount class='approve__amount' color="grey" size="med" :value="amount"></ae-amount>
+        <ae-amount class='approve__amount' color="black" size="med" :value="amount"></ae-amount>
+        <p v-if="!!usdValue" class="usd-value">{{usdValueStr}}</p>
         <hr>
-        <p small center>
-          Choose the amount of Æ with which you want to support the author
-        </p>
-
+        <div class="additional-fees-table" v-if="!!gasEstimate">
+          <span class="additional-fees-header"> Additional fees</span>
+          <div class="additional-fees-value">
+            <div class="additional-fees-eth">{{gasEstimateStr}}</div>
+            <div v-if="!!usdGas" class="usd-value">{{usdGasStr}}</div>
+          </div>
+        </div>
         <div class="bottom-buttons">
           <ae-button size='smaller' type='normal' @click="reject">
             <svg slot="icon"

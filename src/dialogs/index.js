@@ -19,4 +19,6 @@ Vue.use(ModalDialogs, {
   }
 });
 
-export const approveTransaction = makeDialog(Approve, 'transaction', 'appName');
+export const approveTransaction = makeDialog(
+  Approve, 'transaction', 'estimateGas', 'getGasPrice', 'appName'
+)
