@@ -44,6 +44,9 @@ npm install
 # serve with hot reload at localhost:8080
 npm run dev
 
+# if running locally but need https generate certs like:
+openssl req -nodes -new -x509 -keyout certs/server.key -out certs/server.cert
+
 # build for production with minification
 npm run build
 

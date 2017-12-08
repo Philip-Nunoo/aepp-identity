@@ -1,5 +1,8 @@
 require('./check-versions')()
 
+const https = require('https')
+const fs = require('fs')
+
 var config = require('../config')
 if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
@@ -65,7 +68,7 @@ app.use(hotMiddleware)
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
 
-var uri = 'http://localhost:' + port
+var uri = 'https://localhost:' + port
 
 var _resolve
 var readyPromise = new Promise(resolve => {
@@ -82,7 +85,11 @@ devMiddleware.waitUntilValid(() => {
   _resolve()
 })
 
-var server = app.listen(port)
+// var server = app.listen(port)
+var server = https.createServer({
+    key: fs.readFileSync('./certs/server.key'),
+    cert: fs.readFileSync('./certs/server.cert')
+}, app).listen(port);
 
 module.exports = {
   ready: readyPromise,
